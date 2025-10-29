@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Madam Ji 💐</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+  height:100vh;overflow:hidden;
+  background:linear-gradient(135deg,#ffe5ec,#d9faff,#fff6da);
+  display:flex;justify-content:center;align-items:center;flex-direction:column;
+  position:relative;
+}
+h1{font-size:3rem;color:#ff66b3;text-shadow:2px 2px #fff;animation:float 3s ease-in-out infinite;text-shadow: 20px -10px 6px #67817d;}
+h2{margin-top:15px;color:#555;font-weight:500;}
+p{margin-top:20px;max-width:500px;text-align:center;color:#444;font-size:1.1rem;}
+button{
+  background:#ffb6c1;border:none;padding:12px 25px;border-radius:30px;
+  font-size:1rem;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,0.1);transition:0.3s;
+}
+button:hover{transform:scale(1.05);}
+#runBtn{position:absolute;top:60%;left:50%;transform:translate(-50%,-50%);background:#ffc2d1;}
+#realBtn{margin-top:80px;background:#b2f2bb;}
+#realBtn:hover{background:#8de8a1;}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.emoji{position:absolute;font-size:1.5rem;animation:fall 6s linear infinite;opacity:0.8;}
+@keyframes fall{0%{transform:translateY(-10vh) rotate(0deg);opacity:0;}10%{opacity:1;}100%{transform:translateY(110vh) rotate(360deg);opacity:0;}}
+.sparkle{position:absolute;font-size:2rem;animation:sparkleUp 1.5s ease-out forwards;pointer-events:none;}
+@keyframes sparkleUp{0%{transform:scale(0.5) translateY(0);opacity:1;}100%{transform:scale(1.5) translateY(-100px);opacity:0;}}
+</style>
+</head>
+<body>
+
+<h1>Hey Madam Jii 🌸</h1>
+<h2>You make the world a little brighter 💫</h2>
+<p>This tiny website is just to remind you how special and amazing you are.<br>Even the stars shine a bit brighter when *Madam Ji* smiles ✨</p>
+
+<button id="runBtn">Click Me If You Can 😜</button>
+<button id="realBtn">Okay Fine 😅 Click Me!</button>
+
+<audio id="bgMusic" autoplay>
+  <source src="Blue.mp3" >
+  
+</audio>
+
+<script>
+  // music 
+  let body = document.querySelector("body");
+  // event lististener 
+  const mus = new Audio('Blue.mp3');
+  body.addEventListener('click',e=>{
+   mus.play();
+  })
+// Floating emojis
+const emojis=['💖','🌸','⭐','💫','🌷','💛'];
+function createEmoji(){
+  const emoji=document.createElement('div');
+  emoji.classList.add('emoji');
+  emoji.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+  emoji.style.left=Math.random()*100+'vw';
+  emoji.style.animationDuration=(Math.random()*3+4)+'s';
+  document.body.appendChild(emoji);
+  setTimeout(()=>emoji.remove(),6000);
+}
+setInterval(createEmoji,500);
+
+// Moving button
+const runBtn=document.getElementById('runBtn');
+runBtn.addEventListener('mouseover',()=>{
+  const x=Math.random()*(window.innerWidth-150);
+  const y=Math.random()*(window.innerHeight-70);
+  runBtn.style.left=`${x}px`;
+  runBtn.style.top=`${y}px`;
+});
+runBtn.addEventListener('click',()=>{
+  alert("You actually caught me?! 😳 You’re too quick, Madam Ji! 💕✨");
+});
+let bgMusic = document.querySelector("#bgMusic")
+// Real button + sparkles
+const realBtn=document.getElementById('realBtn');
+realBtn.addEventListener('click',(e)=>{
+  alert("Awww 🥰 You finally clicked me! Never stop smiling, Madam Ji 💖 You make everything beautiful!");
+  for(let i=0;i<15;i++){
+    const sparkle=document.createElement('div');
+    sparkle.classList.add('sparkle');
+    sparkle.textContent=['💖','✨','🌸','💫','🌷'][Math.floor(Math.random()*5)];
+    sparkle.style.left=e.clientX+(Math.random()*100-50)+'px';
+    sparkle.style.top=e.clientY+(Math.random()*100-50)+'px';
+    document.body.appendChild(sparkle);
+    setTimeout(()=>sparkle.remove(),1500);
+  }
+    
+});
+
+// Attempt autoplay (some browsers still require user gesture)
+</script>
+
+</body>
+</html>
